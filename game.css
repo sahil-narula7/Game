@@ -1,0 +1,19 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+body {
+    color: #47455d;
+    background-color: #0df7d0;
+}
+h1 {
+    color: #2108ff;
+    text-align: center;
+    margin: 10px;
+    padding: 10px;
+}
+p {
+    text-align: center;
+    padding: 10px;
+    margin: 10px;
+}
