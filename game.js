@@ -39,16 +39,121 @@ function playRound (humanChoice, getComputerChoice) {
     }
 }
 
-function game () {
-    let humanScore = 0;
-    let computerScore = 0;
+const div_style = document.createElement('div');
+const div_winner = document.createElement('div');
+const div_score = document.createElement('div');
 
-    for (let i = 0; i < 5; i++) {
-        const result = playRound(humanChoice, getComputerChoice);
-        result === "win" ? humanScore++ : result === "lose" ? computerScore++ : null;    
+const button_rock = document.createElement('button');
+const button_paper = document.createElement('button');
+const button_scissors = document.createElement('button');
+const btn_reset = document.createElement('button');
+
+btn_reset.textContent = "Reset Game";
+button_rock.textContent = "Rock";
+button_paper.textContent = "Paper";
+button_scissors.textContent = "Scissors";
+
+let humanScore = 0;
+let computerScore = 0;
+let round = 0;
+
+btn_reset.addEventListener("click", function () {
+    humanScore = 0;
+    computerScore = 0;
+    round = 0;
+    div_score.textContent = `Round: 0 | Human: 0 |  Computer: 0`;
+    div_winner.textContent = "";
+});
+
+button_rock.addEventListener("click", function () {
+    if (round >= 5) return; // Prevent further rounds after 5
+    const result = playRound(() => "rock", getComputerChoice);
+    round++; // Increment round count
+    if (result === "win") {
+        humanScore++;
+    } else if (result === "lose") {
+        computerScore++;
     }
-    alert(`Final Score - You: ${humanScore}, Computer: ${computerScore}`);
-}
+    div_score.textContent = `Round: ${round} | Human: ${humanScore} | Computer: ${computerScore}`;
+    div_winner.textContent = result;
+    if (round === 5) {
+        if (humanScore > computerScore) {
+            div_winner.textContent = "Game Over! You win the game!";
+        } else if (humanScore < computerScore) {
+            div_winner.textContent = "Game Over! Computer wins the game!";
+        } else {
+            div_winner.textContent = "Game Over! It's a tie!";
+        }
+    }
+});
 
-game();
+button_paper.addEventListener("click", function () {
+    if (round >= 5) return; // Prevent further rounds after 5
+    const result = playRound(() => "paper", getComputerChoice);
+    round++; // Increment round count
+    if (result === "win") {
+        humanScore++;
+    } else if (result === "lose") {
+        computerScore++;
+    }
+    div_score.textContent = `Round: ${round} | Human: ${humanScore} | Computer: ${computerScore}`;
+    div_winner.textContent = result;
+    if (round === 5) {
+        if (humanScore > computerScore) {
+            div_winner.textContent = "Game Over! You win the game!";
+        } else if (humanScore < computerScore) {
+            div_winner.textContent = "Game Over! Computer wins the game!";
+        } else {
+            div_winner.textContent = "Game Over! It's a tie!";
+        }
+    }
+});
 
+button_scissors.addEventListener("click", function () {
+    if (round >= 5) return; // Prevent further rounds after 5
+    const result = playRound(() => "scissors", getComputerChoice);
+    round++; // Increment round count
+        if (result === "win") {
+        humanScore++;
+    } else if (result === "lose") {
+        computerScore++;
+    }
+    div_score.textContent = `Round: ${round} | Human: ${humanScore} | Computer: ${computerScore}`;
+    div_winner.textContent = result;
+    if (round === 5) {
+        if (humanScore > computerScore) {
+            div_winner.textContent = "Game Over! You win the game!";
+        } else if (humanScore < computerScore) {
+            div_winner.textContent = "Game Over! Computer wins the game!";
+        } else {
+            div_winner.textContent = "Game Over! It's a tie!";
+        }
+    }
+});
+
+button_rock.style.margin = "10px";
+button_paper.style.margin = "10px";
+button_scissors.style.margin = "10px";
+
+div_style.style.display = "flex";
+div_style.style.flexDirection = "row";
+div_style.style.justifyContent = "center";
+div_style.style.alignItems = "center";
+div_style.style.flexWrap = "wrap";
+
+div_style.appendChild(button_rock);
+div_style.appendChild(button_paper);
+div_style.appendChild(button_scissors);
+div_style.appendChild(btn_reset);
+
+div_winner.style.textAlign = "center";
+div_score.style.textAlign = "center";
+div_score.style.marginTop = "10px";
+
+btn_reset.style.backgroundColor = "lightgray";
+btn_reset.style.border = "1px solid #ccc";
+btn_reset.style.cursor = "pointer";
+
+document.body.appendChild(div_style);
+document.body.appendChild(div_winner);
+document.body.appendChild(div_score);
