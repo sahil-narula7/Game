@@ -65,9 +65,9 @@ btn_reset.addEventListener("click", function () {
     div_winner.textContent = "";
 });
 
-button_rock.addEventListener("click", function () {
-    if (round >= 5) return; // Prevent further rounds after 5
-    const result = playRound(() => "rock", getComputerChoice);
+function playGame (humanChoice){
+    if (round >= 5) return;
+    const result = playRound(() => humanChoice, getComputerChoice);
     round++; // Increment round count
     if (result === "win") {
         humanScore++;
@@ -85,50 +85,17 @@ button_rock.addEventListener("click", function () {
             div_winner.textContent = "Game Over! It's a tie!";
         }
     }
+};
+button_rock.addEventListener("click", function () {
+    playGame("rock");
 });
 
 button_paper.addEventListener("click", function () {
-    if (round >= 5) return; // Prevent further rounds after 5
-    const result = playRound(() => "paper", getComputerChoice);
-    round++; // Increment round count
-    if (result === "win") {
-        humanScore++;
-    } else if (result === "lose") {
-        computerScore++;
-    }
-    div_score.textContent = `Round: ${round} | Human: ${humanScore} | Computer: ${computerScore}`;
-    div_winner.textContent = result;
-    if (round === 5) {
-        if (humanScore > computerScore) {
-            div_winner.textContent = "Game Over! You win the game!";
-        } else if (humanScore < computerScore) {
-            div_winner.textContent = "Game Over! Computer wins the game!";
-        } else {
-            div_winner.textContent = "Game Over! It's a tie!";
-        }
-    }
+    playGame("paper");
 });
 
 button_scissors.addEventListener("click", function () {
-    if (round >= 5) return; // Prevent further rounds after 5
-    const result = playRound(() => "scissors", getComputerChoice);
-    round++; // Increment round count
-        if (result === "win") {
-        humanScore++;
-    } else if (result === "lose") {
-        computerScore++;
-    }
-    div_score.textContent = `Round: ${round} | Human: ${humanScore} | Computer: ${computerScore}`;
-    div_winner.textContent = result;
-    if (round === 5) {
-        if (humanScore > computerScore) {
-            div_winner.textContent = "Game Over! You win the game!";
-        } else if (humanScore < computerScore) {
-            div_winner.textContent = "Game Over! Computer wins the game!";
-        } else {
-            div_winner.textContent = "Game Over! It's a tie!";
-        }
-    }
+    playGame("scissors");
 });
 
 button_rock.style.margin = "10px";
